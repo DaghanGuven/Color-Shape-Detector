@@ -1,167 +1,167 @@
 import cv2
 import numpy as np
 
-def dynamic_color_threshold(frame, target_color_lower, target_color_upper):
-    """Apply dynamic color threshold based on the target color."""
-    hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    mask = cv2.inRange(hsv_frame, target_color_lower, target_color_upper)
-    return mask
+def dinamik_renk_esigi(kare, hedef_renk_alt, hedef_renk_ust):
+    """Hedef renge gore dinamik renk esigi uygula."""
+    hsv_kare = cv2.cvtColor(kare, cv2.COLOR_BGR2HSV)
+    maske = cv2.inRange(hsv_kare, hedef_renk_alt, hedef_renk_ust)
+    return maske
 
-def filter_contours(contours, min_area):
-    """Filter contours based on minimum area."""
-    filtered_contours = [contour for contour in contours if cv2.contourArea(contour) > min_area]
-    return filtered_contours
+def kontur_filtresi(konturlar, min_alan):
+    """Minimum alana gore konturlari filtrele."""
+    filtreli_konturlar = [kontur for kontur in konturlar if cv2.contourArea(kontur) > min_alan]
+    return filtreli_konturlar
 
-def detect_color(hsv_color):
-    """Determine color based on HSV values."""
-    # Define color ranges in HSV
-    blue_range = (np.array([100, 80, 50]), np.array([140, 255, 255]))
-    red_range = (np.array([0, 100, 100]), np.array([10, 255, 255]))
-    yellow_range = (np.array([20, 100, 100]), np.array([30, 255, 255]))
-    green_range = (np.array([40, 100, 100]), np.array([80, 255, 255]))
-    orange_range = (np.array([10, 100, 100]), np.array([20, 255, 255]))
-    purple_range = (np.array([120, 100, 100]), np.array([160, 255, 255]))
-    pink_range = (np.array([160, 100, 100]), np.array([180, 255, 255]))
+def renk_tespiti(hsv_renk):
+    """HSV degerlerine gore rengi belirle."""
+    # HSV'de renk araliklarini tanimla
+    mavi_aralik = (np.array([100, 80, 50]), np.array([140, 255, 255]))
+    kirmizi_aralik = (np.array([0, 100, 100]), np.array([10, 255, 255]))
+    sari_aralik = (np.array([20, 100, 100]), np.array([30, 255, 255]))
+    yesil_aralik = (np.array([40, 100, 100]), np.array([80, 255, 255]))
+    turuncu_aralik = (np.array([10, 100, 100]), np.array([20, 255, 255]))
+    mor_aralik = (np.array([120, 100, 100]), np.array([160, 255, 255]))
+    pembe_aralik = (np.array([160, 100, 100]), np.array([180, 255, 255]))
 
-    if blue_range[0][0] <= hsv_color[0] <= blue_range[1][0] and \
-       blue_range[0][1] <= hsv_color[1] <= blue_range[1][1] and \
-       blue_range[0][2] <= hsv_color[2] <= blue_range[1][2]:
-        return "Blue"
-    elif red_range[0][0] <= hsv_color[0] <= red_range[1][0] and \
-         red_range[0][1] <= hsv_color[1] <= red_range[1][1] and \
-         red_range[0][2] <= hsv_color[2] <= red_range[1][2]:
-        return "Red"
-    elif yellow_range[0][0] <= hsv_color[0] <= yellow_range[1][0] and \
-         yellow_range[0][1] <= hsv_color[1] <= yellow_range[1][1] and \
-         yellow_range[0][2] <= hsv_color[2] <= yellow_range[1][2]:
-        return "Yellow"
-    elif green_range[0][0] <= hsv_color[0] <= green_range[1][0] and \
-         green_range[0][1] <= hsv_color[1] <= green_range[1][1] and \
-         green_range[0][2] <= hsv_color[2] <= green_range[1][2]:
-        return "Green"
-    elif orange_range[0][0] <= hsv_color[0] <= orange_range[1][0] and \
-         orange_range[0][1] <= hsv_color[1] <= orange_range[1][1] and \
-         orange_range[0][2] <= hsv_color[2] <= orange_range[1][2]:
-        return "Orange"
-    elif purple_range[0][0] <= hsv_color[0] <= purple_range[1][0] and \
-         purple_range[0][1] <= hsv_color[1] <= purple_range[1][1] and \
-         purple_range[0][2] <= hsv_color[2] <= purple_range[1][2]:
-        return "Purple"
-    elif pink_range[0][0] <= hsv_color[0] <= pink_range[1][0] and \
-         pink_range[0][1] <= hsv_color[1] <= pink_range[1][1] and \
-         pink_range[0][2] <= hsv_color[2] <= pink_range[1][2]:
-        return "Pink"
+    if mavi_aralik[0][0] <= hsv_renk[0] <= mavi_aralik[1][0] and \
+       mavi_aralik[0][1] <= hsv_renk[1] <= mavi_aralik[1][1] and \
+       mavi_aralik[0][2] <= hsv_renk[2] <= mavi_aralik[1][2]:
+        return "Mavi"
+    elif kirmizi_aralik[0][0] <= hsv_renk[0] <= kirmizi_aralik[1][0] and \
+         kirmizi_aralik[0][1] <= hsv_renk[1] <= kirmizi_aralik[1][1] and \
+         kirmizi_aralik[0][2] <= hsv_renk[2] <= kirmizi_aralik[1][2]:
+        return "Kirmizi"
+    elif sari_aralik[0][0] <= hsv_renk[0] <= sari_aralik[1][0] and \
+         sari_aralik[0][1] <= hsv_renk[1] <= sari_aralik[1][1] and \
+         sari_aralik[0][2] <= hsv_renk[2] <= sari_aralik[1][2]:
+        return "Sari"
+    elif yesil_aralik[0][0] <= hsv_renk[0] <= yesil_aralik[1][0] and \
+         yesil_aralik[0][1] <= hsv_renk[1] <= yesil_aralik[1][1] and \
+         yesil_aralik[0][2] <= hsv_renk[2] <= yesil_aralik[1][2]:
+        return "Yesil"
+    elif turuncu_aralik[0][0] <= hsv_renk[0] <= turuncu_aralik[1][0] and \
+         turuncu_aralik[0][1] <= hsv_renk[1] <= turuncu_aralik[1][1] and \
+         turuncu_aralik[0][2] <= hsv_renk[2] <= turuncu_aralik[1][2]:
+        return "Turuncu"
+    elif mor_aralik[0][0] <= hsv_renk[0] <= mor_aralik[1][0] and \
+         mor_aralik[0][1] <= hsv_renk[1] <= mor_aralik[1][1] and \
+         mor_aralik[0][2] <= hsv_renk[2] <= mor_aralik[1][2]:
+        return "Mor"
+    elif pembe_aralik[0][0] <= hsv_renk[0] <= pembe_aralik[1][0] and \
+         pembe_aralik[0][1] <= hsv_renk[1] <= pembe_aralik[1][1] and \
+         pembe_aralik[0][2] <= hsv_renk[2] <= pembe_aralik[1][2]:
+        return "Pembe"
     else:
-        return "Undefined"
+        return "Tanimsiz"
 
-def detect_shape_and_color(contour, hsv_frame):
-    """Determine the shape and color of the given contour."""
-    epsilon = 0.02 * cv2.arcLength(contour, True)
-    approx = cv2.approxPolyDP(contour, epsilon, True)
-    sides = len(approx)
+def sekil_ve_renk_tespiti(kontur, hsv_kare):
+    """Verilen konturun sekil ve rengini belirle."""
+    epsilon = 0.02 * cv2.arcLength(kontur, True)
+    yaklasik = cv2.approxPolyDP(kontur, epsilon, True)
+    kenar_sayisi = len(yaklasik)
 
-    color = detect_color(hsv_frame[int(contour.mean(axis=0)[:, 1]), int(contour.mean(axis=0)[:, 0])])
+    renk = renk_tespiti(hsv_kare[int(kontur.mean(axis=0)[:, 1]), int(kontur.mean(axis=0)[:, 0])])
 
-    if sides == 3:
-        return "Triangle", color
-    elif sides == 4:
-        x, y, w, h = cv2.boundingRect(approx)
-        aspect_ratio = float(w) / h
+    if kenar_sayisi == 3:
+        return "Ucgen", renk
+    elif kenar_sayisi == 4:
+        x, y, w, h = cv2.boundingRect(yaklasik)
+        en_boy_orani = float(w) / h
 
-        if 0.8 <= aspect_ratio <= 1.2:
-            return "Square", color
+        if 0.8 <= en_boy_orani <= 1.2:
+            return "Kare", renk
         else:
-            return "Rectangle", color
-    elif sides == 5:
-        return "Pentagon", color
-    elif sides == 6:
-        return "Hexagon", color
+            return "Dikdortgen", renk
+    elif kenar_sayisi == 5:
+        return "Besgen", renk
+    elif kenar_sayisi == 6:
+        return "Altigen", renk
     else:
-        (x, y), radius = cv2.minEnclosingCircle(approx)
-        circularity = cv2.contourArea(approx) / (np.pi * radius ** 2)
+        (x, y), yaricap = cv2.minEnclosingCircle(yaklasik)
+        yuvarlaklik = cv2.contourArea(yaklasik) / (np.pi * yaricap ** 2)
 
-        return "Circle", color if circularity >= 0.6 else "Undefined"
+        return "Daire", renk if yuvarlaklik >= 0.6 else "Tanimsiz"
 
-def process_frame(frame):
-    """Process each frame to detect shapes and colors."""
-    hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+def kare_isleme(kare):
+    """Her kareyi isleyerek sekil ve renk tespiti yap."""
+    hsv_kare = cv2.cvtColor(kare, cv2.COLOR_BGR2HSV)
 
-    # Define target color ranges in HSV for different colors
-    blue_lower = np.array([100, 80, 50])
-    blue_upper = np.array([140, 255, 255])
+    # Farkli renkler icin HSV'de hedef renk araliklarini tanimla
+    mavi_alt = np.array([100, 80, 50])
+    mavi_ust = np.array([140, 255, 255])
 
-    red_lower = np.array([0, 100, 100])
-    red_upper = np.array([10, 255, 255])
+    kirmizi_alt = np.array([0, 100, 100])
+    kirmizi_ust = np.array([10, 255, 255])
 
-    yellow_lower = np.array([20, 100, 100])
-    yellow_upper = np.array([30, 255, 255])
+    sari_alt = np.array([20, 100, 100])
+    sari_ust = np.array([30, 255, 255])
 
-    green_lower = np.array([40, 100, 100])
-    green_upper = np.array([80, 255, 255])
+    yesil_alt = np.array([40, 100, 100])
+    yesil_ust = np.array([80, 255, 255])
 
-    orange_lower = np.array([10, 100, 100])
-    orange_upper = np.array([20, 255, 255])
+    turuncu_alt = np.array([10, 100, 100])
+    turuncu_ust = np.array([20, 255, 255])
 
-    purple_lower = np.array([120, 100, 100])
-    purple_upper = np.array([160, 255, 255])
+    mor_alt = np.array([120, 100, 100])
+    mor_ust = np.array([160, 255, 255])
 
-    pink_lower = np.array([160, 100, 100])
-    pink_upper = np.array([180, 255, 255])
+    pembe_alt = np.array([160, 100, 100])
+    pembe_ust = np.array([180, 255, 255])
 
-    # Apply color thresholding for each color
-    blue_mask = dynamic_color_threshold(frame, blue_lower, blue_upper)
-    red_mask = dynamic_color_threshold(frame, red_lower, red_upper)
-    yellow_mask = dynamic_color_threshold(frame, yellow_lower, yellow_upper)
-    green_mask = dynamic_color_threshold(frame, green_lower, green_upper)
-    orange_mask = dynamic_color_threshold(frame, orange_lower, orange_upper)
-    purple_mask = dynamic_color_threshold(frame, purple_lower, purple_upper)
-    pink_mask = dynamic_color_threshold(frame, pink_lower, pink_upper)
+    # Her renk icin renk esigi uygula
+    mavi_maske = dinamik_renk_esigi(kare, mavi_alt, mavi_ust)
+    kirmizi_maske = dinamik_renk_esigi(kare, kirmizi_alt, kirmizi_ust)
+    sari_maske = dinamik_renk_esigi(kare, sari_alt, sari_ust)
+    yesil_maske = dinamik_renk_esigi(kare, yesil_alt, yesil_ust)
+    turuncu_maske = dinamik_renk_esigi(kare, turuncu_alt, turuncu_ust)
+    mor_maske = dinamik_renk_esigi(kare, mor_alt, mor_ust)
+    pembe_maske = dinamik_renk_esigi(kare, pembe_alt, pembe_ust)
 
-    # Combine masks for different colors
-    mask = cv2.bitwise_or(cv2.bitwise_or(blue_mask, red_mask, yellow_mask),
-                          cv2.bitwise_or(green_mask, orange_mask, purple_mask, pink_mask))
+    # Farkli renk maskelerini birlestir
+    maske = cv2.bitwise_or(cv2.bitwise_or(mavi_maske, kirmizi_maske, sari_maske),
+                           cv2.bitwise_or(yesil_maske, turuncu_maske, mor_maske, pembe_maske))
 
     kernel = np.ones((5, 5), np.uint8)
-    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+    maske = cv2.morphologyEx(maske, cv2.MORPH_OPEN, kernel)
+    maske = cv2.morphologyEx(maske, cv2.MORPH_CLOSE, kernel)
 
-    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    filtered_contours = filter_contours(contours, min_contour_area)
+    konturlar, _ = cv2.findContours(maske, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    filtreli_konturlar = kontur_filtresi(konturlar, min_kontur_alani)
 
-    for contour in filtered_contours:
-        shape, color = detect_shape_and_color(contour, hsv_frame)
+    for kontur in filtreli_konturlar:
+        sekil, renk = sekil_ve_renk_tespiti(kontur, hsv_kare)
 
-        if color != "Undefined":  # If color is defined and not "Undefined," only then draw
-            x, y, w, h = cv2.boundingRect(contour)
+        if renk != "Tanimsiz":  # Eger renk tanimliysa ve "Tanimsiz" degilse, o zaman ciz
+            x, y, w, h = cv2.boundingRect(kontur)
 
-            if shape != "Circle":
-                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            if sekil != "Daire":
+                cv2.rectangle(kare, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-            if shape == "Circle":
-                cv2.circle(frame, (int(x + w / 2), int(y + h / 2)), int((w + h) / 4), (255, 0, 0), 2)
+            if sekil == "Daire":
+                cv2.circle(kare, (int(x + w / 2), int(y + h / 2)), int((w + h) / 4), (255, 0, 0), 2)
 
-            cv2.putText(frame, f"{color} {shape}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+            cv2.putText(kare, f"{renk} {sekil}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
-    return frame
+    return kare
 
-# Open the camera connection
-cap = cv2.VideoCapture(0)
+# Kamera baglantisini ac
+kamera = cv2.VideoCapture(0)
 
-# Set frame dimensions (1920x1080)
-cap.set(3, 1920)
-cap.set(4, 1080)
+# Kare boyutlarini ayarla (1920x1080)
+kamera.set(3, 1920)
+kamera.set(4, 1080)
 
-# Set minimum contour area
-min_contour_area = 50 # If you make this  too small, it will pick up a lot of noise as 'blobs' instead of actual objects to 50 pixels squared
+# Minimum kontur alanini ayarla
+min_kontur_alani = 50  # Bunu cok kucuk yaparsaniz, 'gurultu' olarak bircok gereksiz kucuk nesneyi alir
 
 while True:
-    ret, frame = cap.read()
+    ret, kare = kamera.read()
 
-    processed_frame = process_frame(frame)
-    cv2.imshow("Object Detection", processed_frame)
+    islenmis_kare = kare_isleme(kare)
+    cv2.imshow("Nesne Tespiti", islenmis_kare)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-cap.release()
+kamera.release()
 cv2.destroyAllWindows()
